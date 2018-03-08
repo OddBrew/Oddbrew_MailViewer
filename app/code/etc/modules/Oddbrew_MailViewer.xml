@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Oddbrew_MailViewer>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Oddbrew_MailViewer>
+    </modules>
+</config>

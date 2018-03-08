@@ -17,4 +17,28 @@
             </oddbrew_mailviewer>
         </models>
     </global>
+    <adminhtml>
+        <events>
+            <controller_action_layout_render_before_adminhtml_sales_order_view>
+                <observers>
+                    <oddbrew_mailviewer_add_button_order_view>
+                        <class>oddbrew_mailviewer/observer</class>
+                        <method>controllerActionLayoutRenderBeforeAdminhtmlSalesOrderView</method>
+                        <type>singleton</type>
+                    </oddbrew_mailviewer_add_button_order_view>
+                </observers>
+            </controller_action_layout_render_before_adminhtml_sales_order_view>
+        </events>
+    </adminhtml>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <oddbrew_mailviewer after="Mage_Adminhtml">Oddbrew_MailViewer_Adminhtml</oddbrew_mailviewer>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
 </config>

@@ -25,6 +25,7 @@ class Oddbrew_MailViewer_Model_Observer
     public function adminhtmlBlockHtmlBefore(Varien_Event_Observer $observer)
     {
         $this->_addPreviewButtonToInvoiceGrid($observer);
+        $this->_addPreviewButtonToShipmentGrid($observer);
     }
 
     protected function _addPreviewButtonToOrderView(Varien_Event_Observer $observer)
@@ -61,6 +62,23 @@ class Oddbrew_MailViewer_Model_Observer
             'sortable'  => false,
             'filter' 	=> false,
             'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_invoice'
+        ]);
+    }
+
+    protected function _addPreviewButtonToShipmentGrid(Varien_Event_Observer $observer)
+    {
+        /** @var Mage_Adminhtml_Block_Template $block */
+        $block = $observer->getEvent()->getBlock();
+        if(!$block instanceof Mage_Adminhtml_Block_Sales_Order_View_Tab_Shipments) {
+            return;
+        }
+
+        $block->addColumn('oddbrew_mailviewer_preview_shipment', [
+            'header' => $this->_getHelper()->__('MailViewer'),
+            'index' => 'increment_id',
+            'sortable'  => false,
+            'filter' 	=> false,
+            'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_shipment'
         ]);
     }
 }

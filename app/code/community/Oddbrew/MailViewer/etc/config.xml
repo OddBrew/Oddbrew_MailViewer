@@ -33,6 +33,14 @@
                     </oddbrew_mailviewer_add_button_order_view>
                 </observers>
             </controller_action_layout_render_before_adminhtml_sales_order_view>
+            <adminhtml_block_html_before>
+                <observers>
+                    <oddbrew_mailviewer_add_order_grid_buttons>
+                        <class>oddbrew_mailviewer/observer</class>
+                        <method>adminhtmlBlockHtmlBefore</method>
+                    </oddbrew_mailviewer_add_order_grid_buttons>
+                </observers>
+            </adminhtml_block_html_before>
         </events>
         <layout>
             <updates>

@@ -58,6 +58,18 @@ class Oddbrew_MailViewer_Block_Adminhtml_System_Email_Template_Preview extends M
                 $vars['payment_html'] = $paymentBlock->toHtml();
                 $vars['billing'] = $mainEntity->getBillingAddress();
                 break;
+            case 'invoice':
+            case 'invoice_guest':
+                $vars['invoice'] = $mainEntity;
+                $vars['order'] = $mainEntity->getOrder();
+                $vars['store'] = $mainEntity->getStore();
+                $vars['billing'] = $mainEntity->getBillingAddress();
+            /** @var Mage_Core_Block_Template $paymentBlock */
+            $paymentBlock = Mage::helper('payment')->getInfoBlock($mainEntity->getOrder()->getPayment())
+                ->setIsSecureMode(true);
+            $paymentBlock->getMethod()->setStore($mainEntity->getStoreId());
+            $vars['payment_html'] = $paymentBlock->toHtml();
+                break;
         }
 
         return $vars;
@@ -73,6 +85,9 @@ class Oddbrew_MailViewer_Block_Adminhtml_System_Email_Template_Preview extends M
             case 'new_order':
             case 'new_order_guest':
                 return Mage::getModel('sales/order');
+            case 'invoice':
+            case 'invoice_guest':
+                return Mage::getModel('sales/order_invoice');
         }
     }
 }

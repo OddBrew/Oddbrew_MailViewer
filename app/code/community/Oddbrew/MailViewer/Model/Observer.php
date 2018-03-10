@@ -26,6 +26,7 @@ class Oddbrew_MailViewer_Model_Observer
     {
         $this->_addPreviewButtonToInvoiceGrid($observer);
         $this->_addPreviewButtonToShipmentGrid($observer);
+        $this->_addPreviewButtonToCreditmemoGrid($observer);
     }
 
     protected function _addPreviewButtonToOrderView(Varien_Event_Observer $observer)
@@ -79,6 +80,23 @@ class Oddbrew_MailViewer_Model_Observer
             'sortable'  => false,
             'filter' 	=> false,
             'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_shipment'
+        ]);
+    }
+
+    protected function _addPreviewButtonToCreditmemoGrid(Varien_Event_Observer $observer)
+    {
+        /** @var Mage_Adminhtml_Block_Template $block */
+        $block = $observer->getEvent()->getBlock();
+        if(!$block instanceof Mage_Adminhtml_Block_Sales_Order_View_Tab_Creditmemos) {
+            return;
+        }
+
+        $block->addColumn('oddbrew_mailviewer_preview_creditmemo', [
+            'header' => $this->_getHelper()->__('MailViewer'),
+            'index' => 'increment_id',
+            'sortable'  => false,
+            'filter' 	=> false,
+            'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_creditmemo'
         ]);
     }
 }

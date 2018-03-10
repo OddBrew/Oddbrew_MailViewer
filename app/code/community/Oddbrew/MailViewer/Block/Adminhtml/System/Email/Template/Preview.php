@@ -76,12 +76,24 @@ class Oddbrew_MailViewer_Block_Adminhtml_System_Email_Template_Preview extends M
                 $vars['order'] = $mainEntity->getOrder();
                 $vars['store'] = $mainEntity->getStore();
                 $vars['billing'] = $mainEntity->getBillingAddress();
-            /** @var Mage_Core_Block_Template $paymentBlock */
-            $paymentBlock = Mage::helper('payment')->getInfoBlock($mainEntity->getOrder()->getPayment())
-                ->setIsSecureMode(true);
-            $paymentBlock->getMethod()->setStore($mainEntity->getStoreId());
-            $vars['payment_html'] = $paymentBlock->toHtml();
-            break;
+                /** @var Mage_Core_Block_Template $paymentBlock */
+                $paymentBlock = Mage::helper('payment')->getInfoBlock($mainEntity->getOrder()->getPayment())
+                    ->setIsSecureMode(true);
+                $paymentBlock->getMethod()->setStore($mainEntity->getStoreId());
+                $vars['payment_html'] = $paymentBlock->toHtml();
+                break;
+            case 'creditmemo':
+            case 'creditmemo_guest':
+                $vars['creditmemo'] = $mainEntity;
+                $vars['order'] = $mainEntity->getOrder();
+                $vars['store'] = $mainEntity->getStore();
+                $vars['billing'] = $mainEntity->getBillingAddress();
+                /** @var Mage_Core_Block_Template $paymentBlock */
+                $paymentBlock = Mage::helper('payment')->getInfoBlock($mainEntity->getOrder()->getPayment())
+                    ->setIsSecureMode(true);
+                $paymentBlock->getMethod()->setStore($mainEntity->getStoreId());
+                $vars['payment_html'] = $paymentBlock->toHtml();
+                break;
         }
 
         return $vars;
@@ -103,6 +115,9 @@ class Oddbrew_MailViewer_Block_Adminhtml_System_Email_Template_Preview extends M
             case 'shipment':
             case 'shipment_guest':
                 return Mage::getModel('sales/order_shipment');
+            case 'creditmemo':
+            case 'creditmemo_guest':
+                return Mage::getModel('sales/order_creditmemo');
         }
     }
 }

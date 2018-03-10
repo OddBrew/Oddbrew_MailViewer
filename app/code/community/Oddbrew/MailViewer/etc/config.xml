@@ -16,6 +16,11 @@
                 <class>Oddbrew_MailViewer_Model</class>
             </oddbrew_mailviewer>
         </models>
+        <blocks>
+            <oddbrew_mailviewer>
+                <class>Oddbrew_MailViewer_Block</class>
+            </oddbrew_mailviewer>
+        </blocks>
     </global>
     <adminhtml>
         <events>
@@ -29,6 +34,13 @@
                 </observers>
             </controller_action_layout_render_before_adminhtml_sales_order_view>
         </events>
+        <layout>
+            <updates>
+                <oddbrew_mailviewer>
+                    <file>oddbrew_mailviewer/mailviewer.xml</file>
+                </oddbrew_mailviewer>
+            </updates>
+        </layout>
     </adminhtml>
     <admin>
         <routers>

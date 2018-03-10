@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<layout>
+    <adminhtml_oddbrew_mailviewer_preview_base>
+        <block type="core/template" name="root" output="toHtml" template="system/email/template/preview.phtml">
+            <block type="oddbrew_mailviewer/adminhtml_system_email_template_preview" name="content" as="content"/>
+        </block>
+    </adminhtml_oddbrew_mailviewer_preview_base>
+</layout>

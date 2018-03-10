@@ -33,7 +33,7 @@ class Oddbrew_MailViewer_Model_Observer
         }
 
         /** @var string $url */
-        $url = Mage::helper('adminhtml')->getUrl('adminhtml/oddbrew_mailviewer_preview/newOrder', ['order_id' => $order->getId()]);
+        $url = Mage::helper('adminhtml')->getUrl('adminhtml/oddbrew_mailviewer_preview/base', ['entity_id' => $order->getId(), 'mail_type' => 'new_order']);
 
         $block->addButton('oddbrew_mailviewer_order_preview', [
             'label' => $this->_getHelper()->__('Preview Order Mail'),

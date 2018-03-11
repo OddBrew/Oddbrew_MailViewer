@@ -11,7 +11,7 @@ class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
         'shipment' => Mage_Sales_Model_Order_Shipment::XML_PATH_EMAIL_TEMPLATE,
         'shipment_guest' => Mage_Sales_Model_Order_Shipment::XML_PATH_EMAIL_GUEST_TEMPLATE,
         'creditmemo' => Mage_Sales_Model_Order_Creditmemo::XML_PATH_EMAIL_TEMPLATE,
-        'credimemo_guest' => Mage_Sales_Model_Order_Creditmemo::XML_PATH_EMAIL_GUEST_TEMPLATE
+        'creditmemo_guest' => Mage_Sales_Model_Order_Creditmemo::XML_PATH_EMAIL_GUEST_TEMPLATE
     ];
 
     public function getTemplateForMailType($mailType, $storeId = null)

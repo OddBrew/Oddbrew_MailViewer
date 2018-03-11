@@ -24,6 +24,9 @@ class Oddbrew_MailViewer_Model_Observer
 
     public function adminhtmlBlockHtmlBefore(Varien_Event_Observer $observer)
     {
+        if(Mage::app()->getFrontController()->getAction()->getFullActionName() != 'adminhtml_sales_order_view'){
+            return;
+        }
         $this->_addPreviewButtonToInvoiceGrid($observer);
         $this->_addPreviewButtonToShipmentGrid($observer);
         $this->_addPreviewButtonToCreditmemoGrid($observer);
@@ -39,8 +42,13 @@ class Oddbrew_MailViewer_Model_Observer
             return;
         }
 
+        $mailType = 'new_order';
+        if($order->getCustomerIsGuest()){
+            $mailType = 'new_order_guest';
+        }
+
         /** @var string $url */
-        $url = Mage::helper('adminhtml')->getUrl('*/oddbrew_mailviewer_preview/base', ['entity_id' => $order->getId(), 'mail_type' => 'new_order']);
+        $url = Mage::helper('adminhtml')->getUrl('*/oddbrew_mailviewer_preview/base', ['entity_id' => $order->getId(), 'mail_type' => $mailType]);
 
         $block->addButton('oddbrew_mailviewer_order_preview', [
             'label' => $this->_getHelper()->__('Preview Order Mail'),
@@ -57,12 +65,20 @@ class Oddbrew_MailViewer_Model_Observer
             return;
         }
 
+        /** @var Mage_Sales_Model_Order $order */
+        $order = Mage::registry('current_order');
+
+        $renderer = 'invoice';
+        if($order->getCustomerIsGuest()){
+            $renderer = 'invoiceGuest';
+        }
+
         $block->addColumn('oddbrew_mailviewer_preview_invoice', [
             'header' => $this->_getHelper()->__('MailViewer'),
             'index' => 'increment_id',
             'sortable'  => false,
             'filter' 	=> false,
-            'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_invoice'
+            'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_'.$renderer
         ]);
     }
 
@@ -74,12 +90,20 @@ class Oddbrew_MailViewer_Model_Observer
             return;
         }
 
+        /** @var Mage_Sales_Model_Order $order */
+        $order = Mage::registry('current_order');
+
+        $renderer = 'shipment';
+        if($order->getCustomerIsGuest()){
+            $renderer = 'shipmentGuest';
+        }
+
         $block->addColumn('oddbrew_mailviewer_preview_shipment', [
             'header' => $this->_getHelper()->__('MailViewer'),
             'index' => 'increment_id',
             'sortable'  => false,
             'filter' 	=> false,
-            'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_shipment'
+            'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_'.$renderer
         ]);
     }
 
@@ -91,12 +115,20 @@ class Oddbrew_MailViewer_Model_Observer
             return;
         }
 
+        /** @var Mage_Sales_Model_Order $order */
+        $order = Mage::registry('current_order');
+
+        $renderer = 'creditmemo';
+        if($order->getCustomerIsGuest()){
+            $renderer = 'creditmemoGuest';
+        }
+
         $block->addColumn('oddbrew_mailviewer_preview_creditmemo', [
             'header' => $this->_getHelper()->__('MailViewer'),
             'index' => 'increment_id',
             'sortable'  => false,
             'filter' 	=> false,
-            'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_creditmemo'
+            'renderer'  => 'oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_'.$renderer
         ]);
     }
 }

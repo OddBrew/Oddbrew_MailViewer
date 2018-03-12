@@ -1,0 +1,4 @@
+/LICENSE /LICENSE
+/app/code/community/Oddbrew/MailViewer /app/code/community/Oddbrew/MailViewer
+/app/design/adminhtml/default/default/layout/oddbrew_mailviewer/mailviewer.xml /app/design/adminhtml/default/default/layout/oddbrew_mailviewer/mailviewer.xml
+/app/etc/modules/Oddbrew_MailViewer.xml /app/etc/modules/Oddbrew_MailViewer.xml

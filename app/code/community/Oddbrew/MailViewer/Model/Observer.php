@@ -17,16 +17,32 @@ class Oddbrew_MailViewer_Model_Observer
         return $this->_helper;
     }
 
+    /**
+     * Fire all functions linked to controller_action_layout_render_before_adminhtml_sales_order_view event
+     *
+     * @param Varien_Event_Observer $observer
+     */
     public function controllerActionLayoutRenderBeforeAdminhtmlSalesOrderView(Varien_Event_Observer $observer)
     {
         $this->_addPreviewButtonToOrderView($observer);
     }
 
+    /**
+     * Fire all functions attached to adminhtml_block_html_before event
+     *
+     * @param Varien_Event_Observer $observer
+     */
     public function adminhtmlBlockHtmlBefore(Varien_Event_Observer $observer)
     {
         $this->_addPreviewButtonsToOrderViewGrids($observer);
     }
 
+    /**
+     * Add order mail preview button on order view page
+     *
+     * @param Varien_Event_Observer $observer
+     * @return bool
+     */
     protected function _addPreviewButtonToOrderView(Varien_Event_Observer $observer)
     {
         /** @var Mage_Adminhtml_Block_Sales_Order_View $block */
@@ -47,6 +63,12 @@ class Oddbrew_MailViewer_Model_Observer
         ]);
     }
 
+    /**
+     * Add mail preview buttons to invoices, shipments and creditmemos grids on order view page
+     *
+     * @param Varien_Event_Observer $observer
+     * @return bool
+     */
     protected function _addPreviewButtonsToOrderViewGrids(Varien_Event_Observer $observer)
     {
         /** @var Mage_Adminhtml_Block_Template $block */

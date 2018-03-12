@@ -3,6 +3,14 @@
 class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
 {
 
+    /**
+     * Retrieves transactional mail template for a given entity
+     * (Ex : if given an order, will return the 'new_order' mail template)
+     *
+     * @param Mage_Sales_Model_Abstract $entity Can be an order, an invoice, a shipment or a creditmemo
+     * @param null $storeId Optional, for choosing the store on which to retrieve the template
+     * @return Mage_Core_Model_Email_Template
+     */
     public function getTransactionalMailTemplateForEntity(Mage_Sales_Model_Abstract $entity, $storeId = null)
     {
         if ($entity instanceof Mage_Sales_Model_Order) {
@@ -30,11 +38,26 @@ class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
         return $template;
     }
 
+    /**
+     * Generate a mail preview url for the given entity
+     *
+     * @param Mage_Sales_Model_Abstract $entity Can be an order, an invoice, a shipment or a creditmemo
+     * @return mixed
+     */
     public function getTransactionalMailPreviewUrlFromEntity(Mage_Sales_Model_Abstract $entity)
     {
         return Mage::helper('adminhtml')->getUrl('adminhtml/oddbrew_mailviewer_preview/base', ['entity_id' => $entity->getId(), 'entity_type' => $entity::HISTORY_ENTITY_NAME]);
     }
 
+    /**
+     * Generate a mail preview url for the given entity type and entity id
+     *
+     * @see Oddbrew_MailViewer_Helper_Data::getTransactionalEntityModel() for the possible values
+     *
+     * @param $entityType
+     * @param $entityId
+     * @return mixed
+     */
     public function getTransactionalMailPreviewUrl($entityType, $entityId)
     {
         $entity = $this->getTransactionalEntityModel($entityType);
@@ -52,6 +75,8 @@ class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+     * Retrieve the model corresponding to the given entity type
+     *
      * @param $entityType
      * @return Mage_Sales_Model_Abstract|false
      */
@@ -71,6 +96,12 @@ class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
         return false;
     }
 
+    /**
+     * Retrieve all the variables needed to inject in the transactional mail template, depending on the given entity
+     *
+     * @param Mage_Sales_Model_Abstract $mainEntity
+     * @return array
+     */
     public function getEntityTransactionalMailVars(Mage_Sales_Model_Abstract $mainEntity)
     {
         /** @var Mage_Sales_Model_Order $order */

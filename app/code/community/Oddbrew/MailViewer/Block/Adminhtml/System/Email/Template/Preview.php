@@ -3,6 +3,11 @@
 class Oddbrew_MailViewer_Block_Adminhtml_System_Email_Template_Preview extends Mage_Adminhtml_Block_Template
 {
 
+    /**
+     * Generates the whole mail preview
+     *
+     * @return string
+     */
     protected function _toHtml()
     {
         parent::_toHtml();
@@ -37,6 +42,13 @@ class Oddbrew_MailViewer_Block_Adminhtml_System_Email_Template_Preview extends M
         return $templateProcessed;
     }
 
+    /**
+     * Retrieve the final HTML resulting from the template
+     *
+     * @param Mage_Core_Model_Email_Template $template
+     * @param array $vars
+     * @return string
+     */
     protected function _getProcessedTemplate(Mage_Core_Model_Email_Template $template, array $vars)
     {
         Varien_Profiler::start("email_template_proccessing");

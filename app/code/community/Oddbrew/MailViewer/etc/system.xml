@@ -64,11 +64,47 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                             <label>Extension Version</label>
                             <frontend_type>text</frontend_type>
                             <frontend_model>oddbrew_mailviewer/adminhtml_system_config_form_field_version</frontend_model>
-                            <sort_order>100</sort_order>
+                            <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </extension_version>
+                        <extension_website translate="label">
+                            <label>Extension Website</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>oddbrew_mailviewer/adminhtml_system_config_form_field_information</frontend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </extension_website>
+                        <copyright translate="label">
+                            <label>Copyright</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>oddbrew_mailviewer/adminhtml_system_config_form_field_information</frontend_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </copyright>
+                        <author translate="label">
+                            <label>Author</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>oddbrew_mailviewer/adminhtml_system_config_form_field_information</frontend_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </author>
+                        <donate translate="label">
+                            <label>Donate</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>oddbrew_mailviewer/adminhtml_system_config_form_field_information</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </donate>
                     </fields>
                 </about>
                 <settings translate="label">

@@ -169,4 +169,26 @@ class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
 
         return $vars;
     }
+
+    /**
+     * Activate the template hints for the current script execution, on the given (optional) store
+     *
+     * @param $storeId
+     *
+     * @return void
+     */
+    public function enableTemplateDebugMode($storeId = null)
+    {
+        Mage::app()->getStore($storeId)
+            ->setConfig('dev/debug/template_hints', 1)
+            ->setConfig('dev/debug/template_hints_blocks', 1);
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIsMailTemplateDebugActivated()
+    {
+        return (bool) Mage::getStoreConfigFlag('oddbrew_mailviewer/settings/debug_mail_template');
+    }
 }

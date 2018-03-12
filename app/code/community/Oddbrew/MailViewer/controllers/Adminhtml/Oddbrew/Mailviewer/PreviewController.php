@@ -52,6 +52,13 @@ class Oddbrew_MailViewer_Adminhtml_Oddbrew_Mailviewer_PreviewController extends 
      */
     public function baseAction()
     {
+        /** @var Oddbrew_MailViewer_Helper_Data $helper */
+        $helper = Mage::helper('oddbrew_mailviewer');
+
+        if ($helper->getIsMailTemplateDebugActivated()){
+            $helper->enableTemplateDebugMode(Mage_Core_Model_App::ADMIN_STORE_ID);
+        }
+
         $this->loadLayout();
         $this->renderLayout();
     }

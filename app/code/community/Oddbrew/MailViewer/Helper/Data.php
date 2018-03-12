@@ -191,4 +191,14 @@ class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return (bool) Mage::getStoreConfigFlag('oddbrew_mailviewer/settings/debug_mail_template');
     }
+
+    /**
+     * @return string
+     */
+    public function getModuleVersion()
+    {
+        $moduleName = $this->_getModuleName();
+
+        return (string)Mage::getConfig()->getModuleConfig($moduleName)->version;
+    }
 }

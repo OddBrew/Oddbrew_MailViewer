@@ -48,12 +48,12 @@ class Oddbrew_MailViewer_Block_Adminhtml_System_Config_Form_Field_Information ex
 {
 
     /** @var array Informations to display in BO, depending on config key */
-    protected $_informations = [
+    protected $_informations = array(
         'oddbrew_mailviewer_about_author' => "Alexandre Fayette <a href='mailto:alexandre.fayette@gmail.com' target='_top'>alexandre.fayette@gmail.com</a>",
         'oddbrew_mailviewer_about_extension_website' => "<a href='https://www.github.com/OddBrew/Oddbrew_Mailviewer' target='_blank'>Oddbrew_MailViewer</a>",
         'oddbrew_mailviewer_about_copyright' => "Copyright (c) 2018, Alexandre Fayette",
         'oddbrew_mailviewer_about_donate'   => "<a href='https://paypal.me/AlexandreFayette' target='_blank'><img src='https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_37x23.jpg' alt ='Paypal'/></a>"
-        ];
+    );
 
     /**
      * @param Varien_Data_Form_Element_Abstract $element

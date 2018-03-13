@@ -53,12 +53,12 @@ class Oddbrew_MailViewer_Block_Adminhtml_System_Email_Template_Grid_Renderer_Act
      */
     public function render(Varien_Object $row)
     {
-        $actions = [];
-        $actions[] = [
+        $actions = array();
+        $actions[] = array(
             'url' => Mage::helper('oddbrew_mailviewer')->getTransactionalMailPreviewUrl($this->getEntityType(), $row->getId()),
             'popup' => true,
             'caption' => $this->__('Preview')
-        ];
+        );
         $this->getColumn()->setActions($actions);
 
         return parent::render($row);

@@ -90,7 +90,7 @@ class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function getTransactionalMailPreviewUrlFromEntity(Mage_Sales_Model_Abstract $entity)
     {
-        return Mage::helper('adminhtml')->getUrl('adminhtml/oddbrew_mailviewer_preview/base', ['entity_id' => $entity->getId(), 'entity_type' => $entity::HISTORY_ENTITY_NAME]);
+        return Mage::helper('adminhtml')->getUrl('adminhtml/oddbrew_mailviewer_preview/base', array('entity_id' => $entity->getId(), 'entity_type' => $entity::HISTORY_ENTITY_NAME));
     }
 
     /**
@@ -159,13 +159,13 @@ class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
             ->setIsSecureMode(true);
         $paymentBlock->getMethod()->setStore($mainEntity->getStoreId());
 
-        $vars = [
+        $vars = array(
             $mainEntity::HISTORY_ENTITY_NAME => $mainEntity,
             'payment_html' => $paymentBlock->toHtml(),
             'order' => $order,
             'billing' => $mainEntity->getBillingAddress(),
             'store' => $mainEntity->getStore(),
-        ];
+        );
 
         return $vars;
     }

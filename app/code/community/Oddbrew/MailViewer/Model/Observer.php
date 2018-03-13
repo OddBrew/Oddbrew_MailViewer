@@ -100,11 +100,13 @@ class Oddbrew_MailViewer_Model_Observer
         /** @var string $url */
         $url = $this->_getHelper()->getTransactionalMailPreviewUrlFromEntity($order);
 
-        $block->addButton('oddbrew_mailviewer_order_preview', [
+        $block->addButton('oddbrew_mailviewer_order_preview', array(
             'label' => $this->_getHelper()->__('Preview Order Mail'),
             'class' => 'oddbrew-mailviewer-button',
             'onclick' => "popWin('{$url}','_blank','width=800,height=700,resizable=1,scrollbars=1');return false;"
-        ]);
+        ));
+
+        return true;
     }
 
     /**
@@ -135,7 +137,7 @@ class Oddbrew_MailViewer_Model_Observer
             return false;
         }
 
-        $block->addColumn('oddbrew_mailviewer_preview_' . $entityType, [
+        $block->addColumn('oddbrew_mailviewer_preview_' . $entityType, array(
             'header' => $this->_getHelper()->__('MailViewer'),
             'sortable' => false,
             'filter' => false,
@@ -144,8 +146,8 @@ class Oddbrew_MailViewer_Model_Observer
             'width' => '80px',
             'renderer' => Mage::app()->getLayout()->createBlock('oddbrew_mailviewer/adminhtml_system_email_template_grid_renderer_action_preview',
                 'oddbrew_mailviewer_renderer_preview_' . $entityType,
-                ['entity_type' => $entityType])
-        ]);
+                array('entity_type' => $entityType))
+        ));
 
         return true;
     }

@@ -14,7 +14,7 @@ Preview and debug your emails in the back_office with all the context loaded. Re
 * Template/Block hints directly in preview window
 
 ## Requirements (feedback forMagento versions will be appreciated !)
-* PHP >= 5.4
+* PHP >= 5.3
 * Magento CE
     * 1.9 => OK
     * 1.8 => ?

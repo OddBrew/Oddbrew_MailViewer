@@ -1,0 +1,15 @@
+{
+  "name": "oddbrew/oddbrew_mailviewer",
+  "type": "magento-module",
+  "license":"BSD-3-Clause",
+  "description":"A context-aware transactional mail pre-viewer for Magento.",
+  "authors":[
+    {
+      "name":"Alexandre Fayette",
+      "email":"alexandre.fayette@gmail.com"
+    }
+  ],
+  "require": {
+    "magento-hackathon/magento-composer-installer": "*"
+  }
+}

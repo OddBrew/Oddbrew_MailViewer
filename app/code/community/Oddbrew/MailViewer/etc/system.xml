@@ -37,13 +37,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  -->
 <config>
     <tabs>
-        <oddbrew translate="label">
+        <oddbrew>
             <label>Oddbrew Extensions</label>
             <sort_order>1</sort_order>
         </oddbrew>
     </tabs>
     <sections>
-        <oddbrew_mailviewer translate="label">
+        <oddbrew_mailviewer module="oddbrew_mailviewer">
             <label>MailViewer</label>
             <tab>oddbrew</tab>
             <frontend_type>text</frontend_type>
@@ -78,7 +78,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
                         </extension_website>
-                        <copyright translate="label">
+                        <copyright>
                             <label>Copyright</label>
                             <frontend_type>text</frontend_type>
                             <frontend_model>oddbrew_mailviewer/adminhtml_system_config_form_field_information</frontend_model>
@@ -115,7 +115,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     <show_in_website>1</show_in_website>
                     <show_in_store>1</show_in_store>
                     <fields>
-                        <debug_mail_template translate="label">
+                        <debug_mail_template translate="label,comment">
                             <label>Debug mail templates</label>
                             <comment>Enable to display template paths and block types in preview window.</comment>
                             <frontend_type>select</frontend_type>

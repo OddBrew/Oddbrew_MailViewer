@@ -59,6 +59,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </blocks>
     </global>
     <adminhtml>
+        <translate>
+            <modules>
+                <Oddbrew_MailViewer>
+                    <files>
+                        <default>Oddbrew_MailViewer.csv</default>
+                    </files>
+                </Oddbrew_MailViewer>
+            </modules>
+        </translate>
         <events>
             <controller_action_layout_render_before_adminhtml_sales_order_view>
                 <observers>

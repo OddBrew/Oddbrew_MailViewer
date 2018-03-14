@@ -138,7 +138,7 @@ class Oddbrew_MailViewer_Model_Observer
         }
 
         $block->addColumn('oddbrew_mailviewer_preview_' . $entityType, array(
-            'header' => $this->_getHelper()->__('MailViewer'),
+            'header'   => 'MailViewer',
             'sortable' => false,
             'filter' => false,
             'align' => 'center',

@@ -21,7 +21,7 @@ Preview and debug your emails in the back_office with all the context loaded. Re
     * 1.7 => ?
     * 1.6 => ?
 * Magento EE
-    * 1.14 => ?
+    * 1.14 => OK
     * 1.13 => ?
     * 1.12 => ?
     * 1.11 => ?

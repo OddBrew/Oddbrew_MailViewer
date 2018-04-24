@@ -78,11 +78,21 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
                     </oddbrew_mailviewer_add_button_order_view>
                 </observers>
             </controller_action_layout_render_before_adminhtml_sales_order_view>
+            <controller_action_layout_render_before_adminhtml_customer_edit>
+                <observers>
+                    <oddbrew_mailviewer_add_mail_grid_to_customer_details>
+                        <class>oddbrew_mailviewer/observer</class>
+                        <method>controllerActionLayoutRenderBeforeAdminhtmlCustomerEdit</method>
+                        <type>singleton</type>
+                    </oddbrew_mailviewer_add_mail_grid_to_customer_details>
+                </observers>
+            </controller_action_layout_render_before_adminhtml_customer_edit>
             <adminhtml_block_html_before>
                 <observers>
                     <oddbrew_mailviewer_add_order_grid_buttons>
                         <class>oddbrew_mailviewer/observer</class>
                         <method>adminhtmlBlockHtmlBefore</method>
+                        <type>singleton</type>
                     </oddbrew_mailviewer_add_order_grid_buttons>
                 </observers>
             </adminhtml_block_html_before>

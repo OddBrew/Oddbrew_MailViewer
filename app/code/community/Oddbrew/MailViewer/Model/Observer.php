@@ -49,6 +49,8 @@ class Oddbrew_MailViewer_Model_Observer
     /** @var  Oddbrew_Mailviewer_Helper_Data */
     protected $_helper;
 
+    protected $_customerGridAdded = false;
+
     /**
      * @return Oddbrew_Mailviewer_Helper_Data
      */
@@ -71,6 +73,11 @@ class Oddbrew_MailViewer_Model_Observer
         $this->_addPreviewButtonToOrderView($observer);
     }
 
+    public function controllerActionLayoutRenderBeforeAdminhtmlCustomerEdit(Varien_Event_Observer $observer)
+    {
+        $this->_addPreviewGridToCustomerDetails($observer);
+    }
+
     /**
      * Fire all functions attached to adminhtml_block_html_before event
      *
@@ -79,6 +86,7 @@ class Oddbrew_MailViewer_Model_Observer
     public function adminhtmlBlockHtmlBefore(Varien_Event_Observer $observer)
     {
         $this->_addPreviewButtonsToOrderViewGrids($observer);
+        $this->_addPreviewGridToCustomerDetails($observer);
     }
 
     /**
@@ -150,5 +158,23 @@ class Oddbrew_MailViewer_Model_Observer
         ));
 
         return true;
+    }
+
+    protected function _addPreviewGridToCustomerDetails(Varien_Event_Observer $observer)
+    {
+        /** @var Mage_Adminhtml_Block_Customer_Edit_Tabs $block */
+        $block = Mage::app()->getLayout()->getBlock('customer_edit_tabs');
+
+        if (!$block) {
+            return false;
+        }
+
+        $block->addTab('mails', array(
+            'label' => 'Mail Previews',
+            'class' => 'ajax',
+            'url'   => $block->getUrl('*/oddbrew_mailviewer_customer/mails', array('_current' => true))
+        ));
+
+        $this->_customerGridAdded = true;
     }
 }

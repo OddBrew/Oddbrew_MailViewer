@@ -36,7 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 /**
- * Class Oddbrew_MailViewer_Helper_Client
+ * Class Oddbrew_MailViewer_Adminhtml_Oddbrew_Mailviewer_CustomerController
  *
  * @package                Oddbrew_MailViewer
  * @author                 Alexandre Fayette <alexandre.fayette@gmail.com>
@@ -44,35 +44,28 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @license                https://opensource.org/licenses/BSD-3-Clause   3-Clause BSD License (BSD-3-Clause)
  * @website                https://github.com/OddBrew
  */
-class Oddbrew_MailViewer_Helper_Client extends Mage_Core_Helper_Abstract
+class Oddbrew_MailViewer_Adminhtml_Oddbrew_Mailviewer_CustomerController extends Mage_Adminhtml_Controller_Action
 {
 
-    protected  $_clientEmailTemplatesConfigPaths = array(
-        Mage_Customer_Model_Customer::XML_PATH_REGISTER_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_REMIND_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_FORGOT_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_CONFIRM_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_CONFIRMED_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_CHANGED_PASSWORD_OR_EMAIL_TEMPLATE
-    );
-
-
-    public function getAllCustomerEmailTemplatesConfigs($storeId = null)
+    protected function _initCustomer()
     {
-        $system = Mage::getConfig()->loadModulesConfiguration('system.xml');
+        $this->_title($this->__('Customers'))->_title($this->__('Manage Customers'));
 
-        $config = new Varien_Data_Collection();
-        foreach ($this->_clientEmailTemplatesConfigPaths as $path) {
-            $pathParts = explode('/', $path);
-            $node = $fieldsNode = $system->getNode('sections/' . $pathParts[0] . '/groups/' . $pathParts[1] . '/fields/' . $pathParts[2]);
-            $item = new Varien_Object(array(
-                'path' => $path,
-                'label' => Mage::helper('adminhtml')->__((string)$node->label),
-                'value' => Mage::getStoreConfig($path, $storeId)
-            ));
-            $config->addItem($item);
+        $customerId = (int) $this->getRequest()->getParam('id');
+        $customer = Mage::getModel('customer/customer');
+
+        if ($customerId) {
+            $customer->load($customerId);
         }
 
-        return $config;
+        Mage::register('current_customer', $customer);
+        return $this;
+    }
+
+    public function mailsAction()
+    {
+        $this->_initCustomer();
+        $this->loadLayout();
+        $this->renderLayout();
     }
 }

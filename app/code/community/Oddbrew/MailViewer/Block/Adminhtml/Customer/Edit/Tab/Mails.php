@@ -36,7 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 /**
- * Class Oddbrew_MailViewer_Helper_Client
+ * Class Oddbrew_MailViewer_Block_Adminhtml_Customer_Edit_Tab_Mails
  *
  * @package                Oddbrew_MailViewer
  * @author                 Alexandre Fayette <alexandre.fayette@gmail.com>
@@ -44,35 +44,49 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * @license                https://opensource.org/licenses/BSD-3-Clause   3-Clause BSD License (BSD-3-Clause)
  * @website                https://github.com/OddBrew
  */
-class Oddbrew_MailViewer_Helper_Client extends Mage_Core_Helper_Abstract
+class Oddbrew_MailViewer_Block_Adminhtml_Customer_Edit_Tab_Mails extends Mage_Adminhtml_Block_Widget_Grid
 {
-
-    protected  $_clientEmailTemplatesConfigPaths = array(
-        Mage_Customer_Model_Customer::XML_PATH_REGISTER_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_REMIND_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_FORGOT_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_CONFIRM_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_CONFIRMED_EMAIL_TEMPLATE,
-        Mage_Customer_Model_Customer::XML_PATH_CHANGED_PASSWORD_OR_EMAIL_TEMPLATE
-    );
-
-
-    public function getAllCustomerEmailTemplatesConfigs($storeId = null)
+    public function __construct()
     {
-        $system = Mage::getConfig()->loadModulesConfiguration('system.xml');
-
-        $config = new Varien_Data_Collection();
-        foreach ($this->_clientEmailTemplatesConfigPaths as $path) {
-            $pathParts = explode('/', $path);
-            $node = $fieldsNode = $system->getNode('sections/' . $pathParts[0] . '/groups/' . $pathParts[1] . '/fields/' . $pathParts[2]);
-            $item = new Varien_Object(array(
-                'path' => $path,
-                'label' => Mage::helper('adminhtml')->__((string)$node->label),
-                'value' => Mage::getStoreConfig($path, $storeId)
-            ));
-            $config->addItem($item);
-        }
-
-        return $config;
+        parent::__construct();
+        $this->setId('oddbrew_mailviewer_customer_mails_grid');
+        $this->setUseAjax(true);
     }
+
+    protected function _prepareCollection()
+    {
+        $collection = $this->helper('oddbrew_mailviewer/client')->getAllCustomerEmailTemplatesConfigs();
+        $this->setCollection($collection);
+
+        return parent::_prepareCollection();
+    }
+
+    protected function _prepareColumns()
+    {
+        $this->addColumn('path', array(
+            'header'    => Mage::helper('customer')->__('Path'),
+            'width'     => '100',
+            'index'     => 'path',
+        ));
+
+        $this->addColumn('label', array(
+            'header'    => Mage::helper('customer')->__('Config'),
+            'width'     => '100',
+            'index'     => 'label',
+        ));
+
+        $this->addColumn('value', array(
+            'header'    => Mage::helper('customer')->__('Value'),
+            'width'     => '100',
+            'index'     => 'value',
+        ));
+
+        return parent::_prepareColumns();
+    }
+
+    public function getGridUrl()
+    {
+        return $this->getUrl('*/oddbrew_mailviewer_customer/mails', array('_current' => true));
+    }
+
 }

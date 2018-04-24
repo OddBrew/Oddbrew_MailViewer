@@ -6,4 +6,10 @@
             <block type="oddbrew_mailviewer/adminhtml_system_email_template_preview" name="content" as="content"/>
         </block>
     </adminhtml_oddbrew_mailviewer_preview_base>
+
+    <adminhtml_oddbrew_mailviewer_customer_mails>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="oddbrew_mailviewer/adminhtml_customer_edit_tab_mails" name="oddbrew_mailviewer.adminhtml.customer.edit.tab.mails"/>
+        </block>
+    </adminhtml_oddbrew_mailviewer_customer_mails>
 </layout>

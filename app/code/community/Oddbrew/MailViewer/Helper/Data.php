@@ -70,13 +70,26 @@ class Oddbrew_MailViewer_Helper_Data extends Mage_Core_Helper_Abstract
 
         $configValue = Mage::getStoreConfig($emailConfigTemplatePath, $storeId);
 
+        return $this->getMailTemplateByIdentifier($configValue, $storeId);
+    }
+
+    /**
+     * Retrieve default mail template (or custom one) by its code (or ID)
+     *
+     * @param string|int $identifier
+     * @param null       $storeId
+     *
+     * @return Mage_Core_Model_Email_Template
+     */
+    public function getMailTemplateByIdentifier($identifier, $storeId = null)
+    {
         /** @var Mage_Core_Model_Email_Template $template */
         $template = Mage::getModel('core/email_template');
-        if (is_numeric($configValue)) {
-            $template->load($configValue);
+        if (is_numeric($identifier)) {
+            $template->load($identifier);
         } else {
             $localeCode = $storeId ? Mage::getStoreConfig('general/locale/code', $storeId) : null;
-            $template->loadDefault($configValue, $localeCode);
+            $template->loadDefault($identifier, $localeCode);
         }
 
         return $template;

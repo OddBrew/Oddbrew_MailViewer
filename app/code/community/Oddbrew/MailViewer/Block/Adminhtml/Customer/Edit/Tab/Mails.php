@@ -63,22 +63,18 @@ class Oddbrew_MailViewer_Block_Adminhtml_Customer_Edit_Tab_Mails extends Mage_Ad
 
     protected function _prepareColumns()
     {
-        $this->addColumn('path', array(
-            'header'    => Mage::helper('customer')->__('Path'),
-            'width'     => '100',
-            'index'     => 'path',
-        ));
-
         $this->addColumn('label', array(
             'header'    => Mage::helper('customer')->__('Config'),
             'width'     => '100',
             'index'     => 'label',
+            'filter'    => false
         ));
 
-        $this->addColumn('value', array(
-            'header'    => Mage::helper('customer')->__('Value'),
+        $this->addColumn('template', array(
+            'header'    => Mage::helper('customer')->__('Template'),
             'width'     => '100',
-            'index'     => 'value',
+            'index'     => 'template',
+            'filter'    => false
         ));
 
         return parent::_prepareColumns();

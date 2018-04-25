@@ -64,15 +64,25 @@ class Oddbrew_MailViewer_Helper_Client extends Mage_Core_Helper_Abstract
         $config = new Varien_Data_Collection();
         foreach ($this->_clientEmailTemplatesConfigPaths as $path) {
             $pathParts = explode('/', $path);
-            $node = $fieldsNode = $system->getNode('sections/' . $pathParts[0] . '/groups/' . $pathParts[1] . '/fields/' . $pathParts[2]);
+            $node = $system->getNode('sections/' . $pathParts[0] . '/groups/' . $pathParts[1] . '/fields/' . $pathParts[2]);
+            $configValue = Mage::getStoreConfig($path, $storeId);
             $item = new Varien_Object(array(
-                'path' => $path,
                 'label' => Mage::helper('adminhtml')->__((string)$node->label),
-                'value' => Mage::getStoreConfig($path, $storeId)
+                'template' => $this->getMailTemplateCode($configValue, $storeId)
             ));
             $config->addItem($item);
         }
 
         return $config;
+    }
+
+    protected function getMailTemplateCode($identifier, $storeId)
+    {
+        if($identifier)
+
+        /** @var Mage_Core_Model_Email_Template $template */
+        $template = Mage::helper('oddbrew_mailviewer')->getMailTemplateByIdentifier($identifier, $storeId);
+
+        return $template->getTemplateCode();
     }
 }
